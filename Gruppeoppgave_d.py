@@ -21,8 +21,6 @@ stasjon_fil1 = []
 tid_fil1 = []
 lufttemperatur_fil1 = []
 lufttrykk_fil1 = []
-#prøver å legge til dette:
-print(linje)
 
 # Initialiser lister for hver kolonne i fil2
 dato_tid_fil2 = []
