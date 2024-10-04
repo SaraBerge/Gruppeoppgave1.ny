@@ -14,6 +14,8 @@ Created on Tue Oct  1 14:12:45 2024
 
 #Oppgave d)
 
+from datetime import datetime
+
 # Åpne og les filene
 with open('temperatur_trykk_met_samme_rune_time_datasett.csv.txt', 'r') as f1, open('trykk_og_temperaturlogg_rune_time.csv.txt', 'r') as f2:
     # Les linjene og splitt dataene på mellomrom eller komma
@@ -35,19 +37,34 @@ trykk_barometer_fil2 = []
 trykk_absolutt_fil2 = []
 temperatur_fil2 = []
 
+# Ta in dato og tid som tekst 
+# Identifisere type dato 
+# Konvertere til datetime
+# Returner datetime ut av funksjonen 
+def parse_datetime(datetime_string):
+    if "/" in datetime_string:
+        return datetime.strptime(datetime_string, '%m/%d/%Y %H:%M:%S %p')
+    else:
+        return datetime.strptime(datetime_string, '%m.%d.%Y %H:%M')
+
+linjer1.pop()
 # Fyll listene for fil1
 for linje in linjer1:
     data = linje.strip().split(";") 
     navn_fil1.append(data[0])
     stasjon_fil1.append(data[1])
-    tid_fil1.append(data[2])  
+    tid_fil1.append(
+        datetime.strptime(data[2], '%d.%m.%Y %H:%M')
+        )  
     lufttemperatur_fil1.append(data[3])
     lufttrykk_fil1.append(data[4])
 
 # Fyll listene for fil2
 for linje in linjer2:
-    data = linje.strip().split(";") 
-    dato_tid_fil2.append(data[0])
+    data = linje.strip().split(";")
+    dato_tid_fil2.append(
+        parse_datetime(data[0])
+        )
     tid_siden_start_fil2. append(data[1])
     trykk_barometer_fil2.append(data[2])
     trykk_absolutt_fil2.append(data[3])
@@ -55,8 +72,15 @@ for linje in linjer2:
     
 
     
+import matplotlib.pyplot as plt
 
+x_koordinater = [tid_fil1, dato_tid_fil2]
+y_koordinater = [lufttemperatur_fil1, temperatur_fil2]
 
+plt.plot(x_koordinater, y_koordinater, "o-")
+plt.show()
+
+        
 
 
 
