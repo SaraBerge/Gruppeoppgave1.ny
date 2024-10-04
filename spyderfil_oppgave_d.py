@@ -12,7 +12,7 @@ Created on Tue Oct  1 14:12:45 2024
 @author: sara
 """
 
-#Oppgave d)
+#Oppgave d) og e)
 
 from datetime import datetime
 
