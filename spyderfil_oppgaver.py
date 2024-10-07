@@ -51,7 +51,7 @@ def parse_datetime(datetime_string):
 linjer1.pop()
 # Fyll listene for fil1
 for linje in linjer1:
-    data = linje.strip().split(";") 
+    data = linje.replace(",",".").strip().split(";") 
     navn_fil1.append(data[0])
     stasjon_fil1.append(data[1])
     tid_fil1.append(
@@ -62,7 +62,7 @@ for linje in linjer1:
 
 # Fyll listene for fil2
 for linje in linjer2:
-    data = linje.strip().split(";")
+    data = linje.replace(",",".").strip().split(";")
     dato_tid_fil2.append(
         parse_datetime(data[0])              #e)
         )
@@ -79,9 +79,9 @@ import matplotlib.pyplot as plt
 x_koordinater = [tid_fil1, dato_tid_fil2]
 y_koordinater = [lufttemperatur_fil1, temperatur_fil2]
 
-plt.plot(x_koordinater, y_koordinater, "o-")
+plt.plot(x_koordinater[0], y_koordinater[0], "o-")
+plt.plot(x_koordinater[1], y_koordinater[1], "o-")
 plt.show()
-
         
 
 
