@@ -72,6 +72,7 @@ for linje in linjer2:
     temperatur_fil2.append(data[4])
     
 
+temperatur_fil2.replace(',', '.')
     
 #f)
 import matplotlib.pyplot as plt                
