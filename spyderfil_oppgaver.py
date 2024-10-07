@@ -51,7 +51,7 @@ def parse_datetime(datetime_string):
 linjer1.pop()
 # Fyll listene for fil1
 for linje in linjer1:
-    data = linje.replace(",",".").strip().split(";") 
+    data = linje.replace(",",".").strip().split(";")
     navn_fil1.append(data[0])
     stasjon_fil1.append(data[1])
     tid_fil1.append(
@@ -70,7 +70,6 @@ for linje in linjer2:
     trykk_barometer_fil2.append(data[2])
     trykk_absolutt_fil2.append(data[3])
     temperatur_fil2.append(data[4])
-    
 
     
 #f)
