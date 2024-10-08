@@ -108,3 +108,43 @@ plt.plot(tid_fil1, lufttemperatur_fil1, label="Meterologisk")
 plt.plot(dato_tid_fil2, temperatur_fil2, label="UiS")
 plt.legend()
 plt.show()
+
+
+#g) 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def beregn_gjennomsnitt(tider, temperaturer, n):
+    gyldige_tidspunkter = []
+    gjennomsnittsverdier = []
+    
+    # Gå gjennom hvert tidspunkt
+    for i in range(n, len(tider) - n):
+        # Beregn gjennomsnittet av de n forrige, den nåværende, og de n neste målingene
+        snitt = np.mean(temperaturer[i - n:i + n + 1])
+        
+        # Legg til gyldig tidspunkt og gjennomsnittstemperatur i listene
+        gyldige_tidspunkter.append(tider[i])
+        gjennomsnittsverdier.append(snitt)
+    
+    return gyldige_tidspunkter, gjennomsnittsverdier
+
+# Eksempeldata
+tider = np.linspace(0, 100, 1000)  # 1000 tidspunkter
+temperaturer = np.sin(tider) * 10 + 20  # Eksempeltemperaturer (sinuskurve)
+
+# Beregn gjennomsnitt med n=30
+n = 30
+gyldige_tidspunkter, gjennomsnittsverdier = beregn_gjennomsnitt(tider, temperaturer, n)
+
+# Plot original temperaturkurve og gjennomsnittskurve
+plt.figure(figsize=(10, 6))
+plt.plot(tider, temperaturer, label='Temperatur', color='blue')
+plt.plot(gyldige_tidspunkter, gjennomsnittsverdier, label=f'Gjennomsnitt (n={n})', color='orange')
+plt.xlabel('Tid')
+plt.ylabel('Temperatur (°C)')
+plt.title('Temperatur og glidende gjennomsnitt')
+plt.legend()
+plt.grid(True)
+plt.show()
