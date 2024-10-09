@@ -38,7 +38,9 @@ temperatur_fil2 = []
 # Returner datetime ut av funksjonen 
 def parse_datetime(datetime_string):
     if "/" in datetime_string:
-        return datetime.strptime(datetime_string, '%m/%d/%Y %H:%M:%S %p')
+        if " 00:" in datetime_string:
+            datetime_string = datetime_string.replace("00:", "12:", 1)
+        return datetime.strptime(datetime_string, '%m/%d/%Y %I:%M:%S %p')
     else:
         return datetime.strptime(datetime_string, '%m.%d.%Y %H:%M')
 
@@ -102,6 +104,8 @@ for linje in linjer2:
             except ValueError:
                 # Hopp over linjer som ikke kan konverteres til float
                 pass
+
+#f)
 
 # Plotting
 plt.plot(tid_fil1, lufttemperatur_fil1, label="Meterologisk")
